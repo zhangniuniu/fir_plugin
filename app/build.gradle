@@ -3,11 +3,10 @@ apply plugin: 'com.pgy.plugin'
 
 fir {
     //必填 上传 fir.im apk 字段，否则无法上传 APP 到 fir.im
-    api_token '8e35e77758cb05a4bdbfa47a225ee693'
-    //可选 上传fir.im 中显示的changelog
-    change_log '我测试的'
-    app_name '测试的'
-    app_icon project.projectDir.getPath() + '/src/main/res/mipmap-hdpi/ic_launcher.png'
+    api_token 'fir上token'
+    change_log '上传更新描述'
+    app_name '应用名称'
+    app_icon '应用图标的绝对路径'
 }
 
 android {
