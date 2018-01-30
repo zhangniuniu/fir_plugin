@@ -1,0 +1,111 @@
+apply plugin: 'groovy'
+//添加maven plugin, 用于发布我们的jar
+apply plugin: 'maven'
+apply plugin: 'com.novoda.bintray-release'
+dependencies {
+    compile gradleApi()
+    compile 'org.json:json:20090211'
+    compile 'com.squareup.okhttp:okhttp:2.2.0'
+    compile 'commons-lang:commons-lang:2.6'
+    runtime 'com.squareup.okhttp:okhttp:2.2.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+    compile 'com.android.tools.build:gradle:2.3.3'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    google()
+}
+
+//设置maven deployer
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //设置插件的GAV参数
+            pom.groupId = 'com.zhangniuniu.pgyupload'
+            pom.artifactId = 'pgyupload-plugin'
+            pom.version = 1.0
+            //文件发布到下面目录
+            repository(url: uri('../release'))
+        }
+    }
+}
+
+// 应用插件
+//apply plugin: 'com.jfrog.bintray'
+//apply plugin: 'maven-publish'
+//
+//
+//def siteUrl = 'https://github.com/zhangniuniu/pgyplugin'
+//def gitUrl = "https://github.com/zhangniuniu/pgyplugin.git"
+//def issueUrl = "https://github.com/zhangniuniu/pgyplugin/issues"
+//
+//
+//
+//install {
+//    repositories {
+//        mavenInstaller {
+//            // This generates POM.xml with proper paramters
+//            pom.project {
+//
+//                //添加项目描述
+//                name 'pgy upload apk plugin'
+//                url siteUrl
+//
+//                //设置开源证书信息
+//                licenses {
+//                    license {
+//                        name 'The Apache Software License, Version 2.0'
+//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                    }
+//                }
+//                //添加开发者信息
+//                developers {
+//                    developer {
+//                        name 'zhangyong'
+//                        email 'zhangyonglncn@gmail.com'
+//                    }
+//                }
+//
+//                scm {
+//                    connection gitUrl
+//                    developerConnection gitUrl
+//                    url siteUrl
+//                }
+//            }
+//        }
+//
+//    }
+//}
+//
+////配置上传Bintray相关信息
+//bintray {
+//    user = 'zhangniuniu'
+//    key = 'ea0144ef2a75e6a3d28d285376e245f9655efe83'
+//
+//    configurations = ['archives']
+//    pkg {
+//        repo = 'maven' // 上传到中央仓库的名称
+//        name = 'pgyz-plugin' // 上传到jcenter 的项目名称
+//        desc = 'upload apk to pgy' // 项目描述
+//        websiteUrl = siteUrl
+//        issueTrackerUrl = issueUrl
+//        vcsUrl = gitUrl
+//        labels = ['gradle', 'plugin']
+//        licenses = ['Apache-2.0']
+//        publish = true
+//    }
+//}
+//
+//group = 'com.zhangniuniu.pgypluginz'  // 组名
+//version = '1.0.2' // 版本
+
+publish {
+    userOrg = 'zhangniuniu'
+    groupId = 'com.zhangniuniu.pgypluginz'
+    artifactId = 'pgyz-plugin'
+    publishVersion = '1.0.3'
+    desc = 'Oh hi, this is a nice description for a project, right?'
+    website = 'https://github.com/zhangniuniu/pgyplugin'
+}
